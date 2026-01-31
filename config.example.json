@@ -1,0 +1,8 @@
+{
+  "phone": "15551234567",
+  "cwd": "~",
+  "allowedTools": ["Bash", "Read", "Write", "Edit"],
+  "skill": null,
+  "maxTurns": null,
+  "timeout": 300000
+}

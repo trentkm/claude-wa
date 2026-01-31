@@ -1,0 +1,21 @@
+{
+  "name": "claude-wa",
+  "version": "1.0.0",
+  "description": "Lightweight WhatsApp-to-Claude Code bridge",
+  "main": "bridge.js",
+  "type": "module",
+  "scripts": {
+    "start": "node bridge.js"
+  },
+  "keywords": [
+    "whatsapp",
+    "claude",
+    "ai",
+    "bridge"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.16",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
