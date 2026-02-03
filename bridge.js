@@ -69,20 +69,25 @@ async function handleMessage(text, reply) {
     // Extract any images from the response
     const { cleanText, imagePaths } = extractImages(response.text);
 
-    // Send text response (if any)
-    if (cleanText) {
+    // Log response to terminal
+    console.log(`\n📤 Claude response:\n${cleanText}\n`);
+
+    // Split on delimiter ---MSG--- for multiple messages
+    const MESSAGE_DELIMITER = "---MSG---";
+    const messages = cleanText.split(MESSAGE_DELIMITER).map(m => m.trim()).filter(Boolean);
+
+    // Send each message separately
+    for (const msg of messages) {
+      if (!msg) continue;
+
       // WhatsApp has a ~65KB message limit, split if needed
       const MAX_LENGTH = 4000;
-      if (cleanText.length > MAX_LENGTH) {
-        const chunks = [];
-        for (let i = 0; i < cleanText.length; i += MAX_LENGTH) {
-          chunks.push(cleanText.slice(i, i + MAX_LENGTH));
-        }
-        for (const chunk of chunks) {
-          await reply.text(chunk);
+      if (msg.length > MAX_LENGTH) {
+        for (let i = 0; i < msg.length; i += MAX_LENGTH) {
+          await reply.text(msg.slice(i, i + MAX_LENGTH));
         }
       } else {
-        await reply.text(cleanText);
+        await reply.text(msg);
       }
     }
 
